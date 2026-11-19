@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RG Beauty — Catálogo de servicios</title>
+  <meta name="description" content="Catálogo de servicios de belleza de RG Beauty.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="#" aria-label="RG Beauty inicio">
+      <span class="brand__mark">RG</span>
+      <span><strong>RG Beauty</strong><small>SPA &amp; BIENESTAR</small></span>
+    </a>
+    <nav class="nav-links" aria-label="Navegación principal">
+      <a href="#">Inicio</a>
+      <a class="active" href="#catalogo">Servicios</a>
+      <a href="#">Sobre nosotros</a>
+      <a href="#">Mi cuenta</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="#">Iniciar sesión</a>
+      <button type="button">Registrarse</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="catalog" id="catalogo">
+      <header class="catalog__header">
+        <p class="eyebrow">Catálogo RG Beauty</p>
+        <h1>Encuentra tu próximo momento<br>de cuidado</h1>
+        <p class="subtitle">Explora nuestros servicios, conoce su duración y precio de referencia, y reserva en pocos pasos.</p>
+      </header>
+
+      <div class="catalog__tools">
+        <label class="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+          <input id="searchInput" type="search" placeholder="Buscar un servicio...">
+        </label>
+        <span id="serviceCount">18 servicios</span>
+      </div>
+
+      <div class="filters" id="filters">
+        <button class="active" type="button" data-filter="Todos">Todos</button>
+        <button type="button" data-filter="Cortes de cabello">Cortes de cabello</button>
+        <button type="button" data-filter="Peinados y maquillaje">Peinados y maquillaje</button>
+        <button type="button" data-filter="Colorimetría">Colorimetría</button>
+        <button type="button" data-filter="Tratamientos capilares">Tratamientos capilares</button>
+        <button type="button" data-filter="Spa capilar">Spa capilar</button>
+        <button type="button" data-filter="Alisados">Alisados</button>
+        <button type="button" data-filter="Masajes">Masajes</button>
+        <button type="button" data-filter="Depilación">Depilación</button>
+        <button type="button" data-filter="Pestañas">Pestañas</button>
+      </div>
+
+      <div class="services-grid" id="servicesGrid"></div>
+    </section>
+  </main>
+
+  <script>
+    const services = [
+      {category:'Spa capilar', title:'Spa capilar · peinado', description:'Ritual capilar de cuidado profundo y terminación con peinado.', duration:'1 h 40 min', price:'$49.990', image:'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=82'},
+      {category:'Cortes de cabello', title:'Corte de cabello hombre', description:'Corte personalizado según estilo y tipo de cabello.', duration:'45 min', price:'$16.990', image:'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=82'},
+      {category:'Cortes de cabello', title:'Corte de cabello mujer', description:'Diseño de corte personalizado y asesoría de estilo.', duration:'1 h', price:'$24.990', image:'https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=82'},
+      {category:'Cortes de cabello', title:'Corte de cabello niños', description:'Atención cuidadosa y cómoda para los más pequeños.', duration:'1 h', price:'$14.990', image:'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=900&q=82'},
+      {category:'Peinados y maquillaje', title:'Brushing', description:'Peinado con movimiento y acabado profesional.', duration:'45 min', price:'Desde $19.990', image:'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=82'},
+      {category:'Peinados y maquillaje', title:'Maquillaje', description:'Maquillaje para realzar tus facciones y estilo.', duration:'1 h', price:'$34.990', image:'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=900&q=82'},
+      {category:'Colorimetría', title:'Crecimiento', description:'Retoque de crecimiento con diagnóstico previo.', duration:'1 h', price:'$44.990', image:'https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=82'},
+      {category:'Colorimetría', title:'Baño de color', description:'Renovación de tono, brillo y vitalidad del cabello.', duration:'2 h', price:'Desde $49.990', image:'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=82'},
+      {category:'Tratamientos capilares', title:'Moroccan oil hidratante', description:'Tratamiento hidratante para suavidad y brillo.', duration:'1 h 30 min', price:'Desde $29.990', image:'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=82'},
+      {category:'Tratamientos capilares', title:'Plástica capilar', description:'Tratamiento intensivo para mejorar la fibra capilar.', duration:'2 h', price:'Desde $79.990', image:'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=82'},
+      {category:'Alisados', title:'Alisado lineal', description:'Alisado profesional sujeto a evaluación capilar.', duration:'3 h', price:'Desde $69.990', image:'https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=82'},
+      {category:'Masajes', title:'Masaje de relajación corporal', description:'Experiencia corporal de relajación y bienestar.', duration:'1 h', price:'$29.990', image:'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=82'},
+      {category:'Depilación', title:'Mentón', description:'Depilación facial precisa y cuidadosa.', duration:'15 min', price:'$3.990', image:'https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=82'},
+      {category:'Depilación', title:'Bozo', description:'Depilación facial con acabado delicado.', duration:'20 min', price:'$4.990', image:'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=82'},
+      {category:'Depilación', title:'Perfilado de cejas', description:'Diseño y definición respetando la forma natural.', duration:'30 min', price:'$9.990', image:'https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=82'},
+      {category:'Pestañas', title:'Lifting de pestañas', description:'Curvatura y realce natural de las pestañas.', duration:'1 h 30 min', price:'$22.990', image:'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=900&q=82'},
+      {category:'Manicure y pedicure', title:'Manicure tradicional', description:'Cuidado completo y esmaltado tradicional.', duration:'1 h', price:'$15.990', image:'https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=82'},
+      {category:'Manicure y pedicure', title:'Retiro de esmalte permanente', description:'Retiro cuidadoso para proteger la uña natural.', duration:'30 min', price:'$4.990', image:'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=82'}
+    ];
+
+    const grid = document.getElementById('servicesGrid');
+    const searchInput = document.getElementById('searchInput');
+    const count = document.getElementById('serviceCount');
+    let activeFilter = 'Todos';
+
+    function render() {
+      const query = searchInput.value.trim().toLowerCase();
+      const filtered = services.filter(service => {
+        const matchesFilter = activeFilter === 'Todos' || service.category === activeFilter;
+        const matchesSearch = !query || `${service.title} ${service.description} ${service.category}`.toLowerCase().includes(query);
+        return matchesFilter && matchesSearch;
+      });
+
+      count.textContent = `${filtered.length} ${filtered.length === 1 ? 'servicio' : 'servicios'}`;
+      grid.innerHTML = filtered.map(service => `
+        <article class="service-card">
+          <div class="service-card__image">
+            <img src="${service.image}" alt="" loading="lazy">
+            <span>${service.category}</span>
+          </div>
+          <div class="service-card__body">
+            <h2>${service.title}</h2>
+            <p>${service.description}</p>
+            <div class="service-card__meta">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></svg>
+              <span>${service.duration}</span>
+            </div>
+            <div class="service-card__footer">
+              <strong>${service.price}</strong>
+              <button type="button">Reservar</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.getElementById('filters').addEventListener('click', event => {
+      const button = event.target.closest('button');
+      if (!button) return;
+      document.querySelectorAll('.filters button').forEach(item => item.classList.remove('active'));
+      button.classList.add('active');
+      activeFilter = button.dataset.filter;
+      render();
+    });
+
+    searchInput.addEventListener('input', render);
+    render();
+  </script>
+</body>
+</html>
