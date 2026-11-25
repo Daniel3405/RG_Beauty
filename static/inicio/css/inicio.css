@@ -1,5 +1,4 @@
-
-* ---------- Variables ---------- */
+/* ---------- Variables ---------- */
 :root {
   --rose: #c98798;
   --rose-dark: #aa6779;
@@ -9,18 +8,31 @@
   --muted: #77717a;
   --line: #eadfe3;
   --green: #39705b;
+  --green-bg: #e6f2ed;
+  --yellow: #9a6a20;
+  --yellow-bg: #fff4d8;
+  --red: #a8444b;
+  --red-bg: #fbe9ea;
   --white: #fff;
   --shadow: 0 14px 40px #35262e14;
   --gutter: max(32px, calc((100vw - 1260px) / 2));
 }
 
 /* ---------- Reset ---------- */
-*, ::before, ::after { box-sizing: border-box; margin: 0; padding: 0 }
+*, ::before, ::after, ::backdrop {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0 solid;
+}
+
 * { outline-color: var(--rose) }
 
 html {
   scroll-behavior: smooth;
   line-height: 1.5;
+  tab-size: 4;
+  text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
 }
@@ -32,6 +44,7 @@ body {
   font: 14px Inter, Arial, sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit }
 a { color: inherit; text-decoration: none }
 ul { list-style: none }
 img { display: block; max-width: 100% }
@@ -289,12 +302,77 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round
 .hero-card small { color: var(--muted); font-size: 11px }
 .hero-card strong { margin-top: 2px; font-size: 13px; font-weight: 700 }
 
+/* ---------- Servicios (vista previa) ---------- */
+.services-preview { padding: 24px var(--gutter) 96px }
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+.kicker {
+  color: var(--rose-dark);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.section-heading h2, .about h2, .promo-copy h2 {
+  margin: 11px 0 12px;
+  font: 42px/1.13 "DM Serif Display", serif;
+}
+
+.section-heading p { max-width: 480px; color: var(--muted); font-size: 16px; line-height: 1.7 }
+
+.link-button {
+  flex: none;
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--rose);
+  font-size: 14px;
+  font-weight: 600;
+  transition: color .2s, border-color .2s;
+}
+
+.link-button:hover { color: var(--rose-dark); border-color: var(--rose-dark) }
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.service-card {
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.service-image {
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, var(--rose-light), #ecd2da);
+}
+
+.service-image img { width: 100%; height: 100%; object-fit: cover }
+
+.service-body { padding: 22px 24px 26px }
+.service-body h3 { font: 24px/1.2 "DM Serif Display", serif }
+.service-body p { margin-top: 8px; color: var(--muted); line-height: 1.6 }
+.service-body small { display: block; margin-top: 16px; color: var(--rose-dark); font-size: 12px; font-weight: 600 }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1000px) {
   .hero { grid-template-columns: 1fr; gap: 56px; min-height: 0; padding: 48px 24px 72px }
   .hero-visual { justify-self: center }
   .hero-visual::before { display: none }
   .hero-card { left: 16px }
+  .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .services-preview { padding: 24px 24px 72px }
 }
 
 @media (max-width: 860px) {
@@ -307,4 +385,7 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round
   .nav-links, .nav-actions a { display: none }
   .hero p { font-size: 16px }
   .btn { flex: 1 1 100% }
+  .service-grid { grid-template-columns: 1fr }
+  .section-heading { flex-direction: column; align-items: flex-start }
+  .section-heading h2 { font-size: 34px }
 }
