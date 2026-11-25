@@ -1,3 +1,4 @@
+{% load  static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,11 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RG Beauty — Catálogo de servicios</title>
   <meta name="description" content="Catálogo de servicios de belleza de RG Beauty.">
-
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="Inicio.css">
+  <link rel="stylesheet" href="{% static 'inicio/css/Inicio.css' %}">
 </head>
 <body>
 
@@ -54,7 +55,7 @@
             Reservar una cita
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </button>
-          <button class="btn ghost" type="button">Explorar servicios</button>
+          <a class="btn ghost" href="{% url 'servicios' %}">Explorar servicios</a>
         </div>
 
         <ul class="trust-row">
@@ -72,7 +73,8 @@
       <!-- Columna derecha: imagen -->
       <div class="hero-visual">
         <div class="hero-image">
-          <img alt="Productos de cuidado y belleza en un ambiente elegante" src="/BtnInicio/assets/img/photo-1760895535234-2c39c57cf187.jpg">
+          <img alt="Productos de cuidado y belleza en un ambiente elegante"
+                src="{% static 'inicio/img/photo-1760895535234-2c39c57cf187.jpg' %}">
         </div>
 
         <div class="hero-card">
@@ -91,3 +93,4 @@
 
 </body>
 </html>
+<script src="{% static 'inicio/js/funcBotonExplorarSs.js' %}"></script>
