@@ -4,7 +4,7 @@ def inicio(request):
     return render(request, 'inicio/inicio.html')
 
 def servicios(request):
-    return render(request, 'inicio//index.html')
+    return render(request, 'inicio/index.html')
 
 def sobreNosotros(request):
     return render(request, 'inicio/sobre_nosotros.html')
